@@ -1,0 +1,71 @@
+services:
+
+  # Nginx
+  server:
+    build: 
+      context: .
+      dockerfile: .docker/nginx/nginx.dockerfile
+    ports:
+      - '8000:80'
+    volumes:
+      - ./src:/var/www/html
+      - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php
+      - mysql
+
+  ################################
+  # PHP
+  php:
+    build: 
+      context: .
+      dockerfile: .docker/php/php.dockerfile
+    volumes:
+      - ./src:/var/www/html:delegated
+
+  ################################
+  # MySQL
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - ./.docker/mysql/mysql.env
+
+  ################################
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+
+  ################################
+  # Composer
+  composer:
+    build: 
+      context: .docker/composer
+      dockerfile: composer.dockerfile
+    volumes:
+      - ./src:/var/www/html
+
+  ################################
+  # Artisan
+  artisan:
+    build: 
+      context: .
+      dockerfile: .docker/artisan/artisan.dockerfile
+    volumes:
+      - ./src:/var/www/html
+
+  ################################
+  # Npm
+  npm:
+    build: 
+      context: .docker/npm
+      dockerfile: npm.dockerfile
+    volumes:
+      - ./src:/var/www/html
