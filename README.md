@@ -2,6 +2,8 @@
 
 ## first try
 ```docker-compose up -d server```
+<br />
+
 ```docker-compose run composer create-project laravel/laravel .```
 
 ## second try
