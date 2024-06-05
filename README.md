@@ -1,20 +1,17 @@
 # Dockerized laravel
 
-# first try
+## first try
+```docker-compose up -d server```
+```docker-compose run composer create-project laravel/laravel .```
 
-```
-docker-compose up -d server
-docker-compose run composer create-project laravel/laravel .
-```
+## second try
+```docker-compose up -d server```
 
-# second try
-docker-compose up -d server
+## for composer:
+```docker-compose run composer ...```
 
-for composer:
-docker-compose run composer ...
+## for artisan commands:
+```docker-compose run artisan php artisan ...```
 
-for artisan commands:
-docker-compose run artisan php artisan ...
-
-for npm 
-docker-compose npm ...
+## for npm 
+```docker-compose npm ...```
