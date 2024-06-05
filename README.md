@@ -1,8 +1,13 @@
-first try:
+# Dockerized laravel
+
+# first try
+
+```
 docker-compose up -d server
 docker-compose run composer create-project laravel/laravel .
+```
 
-second try:
+# second try
 docker-compose up -d server
 
 for composer:
